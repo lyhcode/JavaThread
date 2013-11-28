@@ -8,13 +8,15 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+
 public class Main {
-    public static void main(String[] args) throws InterruptedException, MalformedURLException{
+
+    public static void main(String[] args) throws InterruptedException, MalformedURLException {
         String[] urls = {
             "http://ipv4.download.thinkbroadband.com/20MB.zip",
-            "http://ipv4.download.thinkbroadband.com/10MB.zip"            
+            "http://ipv4.download.thinkbroadband.com/10MB.zip"
         };
-        
+
         for (String url : urls) {
             new Thread(new Downloader(new URL(url), new File("."))).start();
         }
@@ -22,10 +24,10 @@ public class Main {
 }
 
 class Downloader implements Runnable {
-    
+
     private final URL url;
     private final File destPath;
-    
+
     public Downloader(URL url, File destPath) {
         this.url = url;
         this.destPath = destPath;
@@ -36,15 +38,16 @@ class Downloader implements Runnable {
         try {
             URLConnection conn = url.openConnection();
             conn.connect();
-            
+
             InputStream stream = conn.getInputStream();
-            
+
             File saveToFile = new File(destPath, url.getFile());
-            
+
             OutputStream outputStream = new FileOutputStream(saveToFile);
-            
+
             int len = 0;
             byte[] bytes = new byte[1024];
+
             while ((len = stream.read(bytes)) >= 0) {
                 System.out.printf("Get %d bytes from %s\n", len, url);
                 outputStream.write(bytes, 0, len);

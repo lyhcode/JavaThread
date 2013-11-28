@@ -9,20 +9,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException{
+
+    public static void main(String[] args) throws InterruptedException {
         JFrame demo = new JFrame();
         demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         
+
         final JButton button1 = new JButton("Start");
         final JButton button2 = new JButton("Hello");
         final JLabel label = new JLabel("");
-        
+
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 System.out.println("Start");
-                
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -39,21 +40,20 @@ public class Main {
                 }).start();
             }
         });
-        
+
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Hello");
             }
         });
-         
-        
+
         JPanel panel = new JPanel();
         panel.add(BorderLayout.EAST, button1);
         panel.add(BorderLayout.WEST, button2);
-        
+
         demo.getContentPane().add(BorderLayout.SOUTH, panel);
-        demo.getContentPane().add(BorderLayout.NORTH , label);
+        demo.getContentPane().add(BorderLayout.NORTH, label);
 
         demo.setSize(320, 240);
         demo.setVisible(true);
