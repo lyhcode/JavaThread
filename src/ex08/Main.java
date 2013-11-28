@@ -53,5 +53,4 @@ class Downloader implements Runnable {
             ex.printStackTrace();
         }
     }
-    
 }
